@@ -60,9 +60,10 @@ export class LandPageComponent implements OnInit {
   }
 
   onsubmit(): void {
-    this.cookie.set('userName', this.Obj.userName, 2147483647);
-    this.cookie.set('phoneNumber', this.Obj.phoneNumber, 2147483647);
-    this.cookie.set('email', this.Obj.email, 2147483647);
+    var time = (3600 * 1000)*867660
+    this.cookie.set('userName', this.Obj.userName, time);
+    this.cookie.set('phoneNumber', this.Obj.phoneNumber, time);
+    this.cookie.set('email', this.Obj.email, time);
     console.log(this.Obj.userName);
     console.log(this.Obj.phoneNumber);
     // this.ngFormAdd.reset();
