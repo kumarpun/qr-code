@@ -65,6 +65,6 @@ export class LandPageComponent implements OnInit {
     this.cookie.set('email', this.Obj.email);
     console.log(this.Obj.userName);
     console.log(this.Obj.phoneNumber);
-    this.ngFormAdd.reset();
+    // this.ngFormAdd.reset();
   }
 }
