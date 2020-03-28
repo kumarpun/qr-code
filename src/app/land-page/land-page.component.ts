@@ -60,7 +60,7 @@ export class LandPageComponent implements OnInit {
   }
 
   onsubmit(): void {
-    this.cookie.set('userName', this.Obj.userName);
+    this.cookie.set('userName', this.Obj.userName, 365);
     this.cookie.set('phoneNumber', this.Obj.phoneNumber);
     this.cookie.set('email', this.Obj.email);
     console.log(this.Obj.userName);
