@@ -1,0 +1,38 @@
+<div class="container">
+<form class="text-center border border-light p-5" [formGroup]="ngForm" (ngSubmit)="onsubmit(ngForm.value)">
+
+    <p class="h4 mb-4">Landing page</p>
+  
+    <!-- Name -->
+    <input type="text" formControlName="userName" class="form-control mb-4" placeholder="Name">
+  
+    <input type="email" formControlName="email" class="form-control mb-4" placeholder="Email">
+    <!-- Phone number -->
+    <input type="text" formControlName="phoneNumber" class="form-control mb-4" placeholder="Phone number">
+    
+    <!-- Send button -->
+    <!-- <button class="btn btn-lg btn-primary btn-block">Capture</button> -->
+  
+  </form>
+</div>
+
+<div class="storeToCookie">
+    <form class="text-center border border-light p-5" [formGroup]="ngFormAdd" (ngSubmit)="onsubmit()">
+    
+        <p class="h4 mb-4">Add Info</p>
+      
+        <!-- Name -->
+        <input type="text" formControlName="userName" name="userName" class="form-control mb-4" placeholder="Name"
+        [(ngModel)]="Obj.userName">
+      
+        <input type="email" formControlName="email" class="form-control mb-4" placeholder="Email"
+        [(ngModel)]="Obj.email">
+        <!-- Phone number -->
+        <input type="text" formControlName="phoneNumber" class="form-control mb-4" placeholder="Phone number"
+     [(ngModel)]="Obj.phoneNumber">
+        
+        <!-- Send button -->
+        <button class="btn btn-lg btn-primary btn-block">Capture</button>
+      
+      </form>
+    </div>
