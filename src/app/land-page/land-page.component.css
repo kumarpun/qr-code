@@ -253,6 +253,13 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   @media screen and (min-width: 1024px) {
     .container {
       max-width: 1200px; } }
+      @media screen and (-webkit-min-device-pixel-ratio:0) { 
+        select,
+        textarea,
+        input {
+          font-size: 18px;
+        }
+      }
   @media screen and (max-width: 768px) {
     .signup-content, .signin-content {
       flex-direction: column;
