@@ -3,19 +3,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
 
-export const passwordMatchValidator: ValidatorFn = (formGroup: FormControl): ValidationErrors | null => {
-  return formGroup.get('password').value ===  formGroup.get('confirmPassword').value ?
-  null: { 'passwordMismatch': true};
-}
-
 
 @Component({
-  selector: 'app-land-page',
-  templateUrl: './land-page.component.html',
-  styleUrls: ['./land-page.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-
-export class LandPageComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   Obj: User;  
   ngForm: FormGroup;
@@ -34,9 +28,8 @@ export class LandPageComponent implements OnInit {
 
    createForm() {
     this.ngForm = this.fb.group({
-      userName: [""],
-      phoneNumber: [""],
       email: [""],
+      password: [""],
     });
    }
   //  addForm() {
@@ -51,17 +44,9 @@ export class LandPageComponent implements OnInit {
 
   ngOnInit() {
     this.ngForm = new FormGroup({
-      userName: new FormControl(this.cookie.get('userName')),
       email: new FormControl(this.cookie.get('email')),
-      phoneNumber: new FormControl(this.cookie.get('phoneNumber'))
+      password: new FormControl(this.cookie.get('password'))
     })
-    this.ngFormAdd = new FormGroup({
-      userName: new FormControl(''),
-      email: new FormControl(''),
-      phoneNumber: new FormControl(''),
-      password: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required])
-    }, { validators: passwordMatchValidator })
   }
   
   capture() {
@@ -88,3 +73,4 @@ export class LandPageComponent implements OnInit {
     // this.ngFormAdd.reset();
   }
 }
+

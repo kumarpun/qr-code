@@ -7,12 +7,15 @@ import { LandPageComponent } from './land-page/land-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { CustomMaterialModule } from './core/material/material.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QrCodeComponent,
-    LandPageComponent
+    LandPageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +23,7 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
+    CustomMaterialModule
     
   ],
   providers: [
