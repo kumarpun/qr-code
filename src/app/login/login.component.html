@@ -13,14 +13,14 @@
                 <label for="pass"><i class="prefix fa fa-key"></i></label>
                 <input type="password" formControlName="password" placeholder="Password">
             </div>
+            <!-- Send button -->
+            <button mat-raised-button type="submit" color="primary">
+                <i class="fa fa-paper-plane"></i> Login
+            </button><br><br>
             <div class="form-group">
                 <a [routerLink]="['/sign-up']" routerLinkActive="active">
                   Not register? Click here to Register</a>
            </div>
-            <!-- Send button -->
-            <button mat-raised-button type="submit" color="primary">
-                <i class="fa fa-paper-plane"></i> Login
-            </button> 
           </form>
           </div>
           <div class="signup-image">

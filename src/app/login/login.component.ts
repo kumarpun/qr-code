@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
-
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private cookie: CookieService ,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private _router: Router,
+    public snackbar: MatSnackBar
   ) { 
     this.Obj = new User();
     this.createForm();
@@ -61,15 +64,19 @@ export class LoginComponent implements OnInit {
   }
 
   onsubmit(): void {
+    if(this.cookie.get('email') === this.ngForm.get('email').value &&
+     this.cookie.get('password') === this.ngForm.get('password').value) {
+      console.log('success');
+      this.snackbar.open('Successfully login', 'Close', {
+        duration: 3000
+      })
+      this._router.navigate(['/dashboard']);
 
-    this.cookie.set('userName', this.Obj.userName, 365);
-    this.cookie.set('phoneNumber', this.Obj.phoneNumber, 365);
-    this.cookie.set('email', this.Obj.email, 365);
-    this.cookie.set('password', this.Obj.password, 365);
-    this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
-    console.log(this.Obj.userName);
-    console.log(this.Obj.phoneNumber);
-    location.reload();
+    } else {
+      this.snackbar.open('Credential do not match', 'close', {
+        duration: 3000
+      })
+    }
     // this.ngFormAdd.reset();
   }
 }
