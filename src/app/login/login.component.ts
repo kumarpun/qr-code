@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
 import { MatSnackBar } from '@angular/material';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private cookie: CookieService ,
     public fb: FormBuilder,
     private _router: Router,
-    public snackbar: MatSnackBar
+    public snackbar: MatSnackBar,
+    @Inject(DOCUMENT) private document: Document
   ) { 
     this.Obj = new User();
     this.createForm();
@@ -70,8 +72,7 @@ export class LoginComponent implements OnInit {
       this.snackbar.open('Successfully login', 'Close', {
         duration: 3000
       })
-      this._router.navigate(['/dashboard']);
-
+      this.document.location.href = 'https://doxy.me/drkumarpun';
     } else {
       this.snackbar.open('Credential do not match', 'close', {
         duration: 3000
