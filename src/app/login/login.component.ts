@@ -70,12 +70,15 @@ export class LoginComponent implements OnInit {
      this.cookie.get('password') === this.ngForm.get('password').value) {
       console.log('success');
       this.snackbar.open('Successfully login', 'Close', {
-        duration: 3000
+        duration: 3000,
+        verticalPosition: 'top'  
       })
       this.document.location.href = 'https://doxy.me/drkumarpun';
     } else {
       this.snackbar.open('Credential do not match', 'close', {
-        duration: 3000
+        duration: 3000,
+        verticalPosition: 'top',
+        panelClass: 'snackbar'
       })
     }
     // this.ngFormAdd.reset();

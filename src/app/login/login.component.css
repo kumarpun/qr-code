@@ -12,7 +12,9 @@
 .err-msg{
     color: red;
 }
-
+.snackbar{
+    width: 50px;
+}
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
     display: flex;
