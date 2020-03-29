@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
+import { MatSnackBar } from '@angular/material';
 
 export const passwordMatchValidator: ValidatorFn = (formGroup: FormControl): ValidationErrors | null => {
   return formGroup.get('password').value ===  formGroup.get('confirmPassword').value ?
@@ -25,7 +27,9 @@ export class LandPageComponent implements OnInit {
 
   constructor(
     private cookie: CookieService ,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public router: Router,
+    public snackbar: MatSnackBar,
   ) { 
     this.Obj = new User();
     this.createForm();
@@ -84,7 +88,11 @@ export class LandPageComponent implements OnInit {
     this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
     console.log(this.Obj.userName);
     console.log(this.Obj.phoneNumber);
-    location.reload();
+    this.snackbar.open('Successfully register', 'Close', {
+      duration: 3000,
+      verticalPosition: 'top'  
+    })
+    this.router.navigate(['/landpage']);
     // this.ngFormAdd.reset();
   }
 }
