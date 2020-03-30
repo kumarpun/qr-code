@@ -50,19 +50,19 @@ export class DashboardComponent implements OnInit {
   }
 
   }
-  // getLocation(): void{
-  //   if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition((position)=>{
-  //         const longitude = position.coords.longitude;
-  //         const latitude = position.coords.latitude;
+  getLocation(): void{
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition((position)=>{
+    //       const longitude = position.coords.longitude;
+    //       const latitude = position.coords.latitude;
    
-  //         this.cookie.set('longitude', JSON.stringify(longitude));
-  //         this.cookie.set('latitude', JSON.stringify(latitude));
-  //         this.cookie.set('ipAddress', this.ipAddress);
-  //         });
-  //   } else {
-  //      console.log("No support for geolocation")
-  //   }
-  // }
+          this.cookie.set('lon', JSON.stringify(this.longitude));
+          this.cookie.set('lat', JSON.stringify(this.latitude));
+          this.cookie.set('ipAddress', this.ipAddress);
+    //       });
+    // } else {
+    //    console.log("No support for geolocation")
+    // }
+  }
 
 }
