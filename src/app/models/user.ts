@@ -4,4 +4,5 @@ export class User  {
     phoneNumber: string;
     password: string;
     confirmPassword: string;
+    longitude: string;
 }

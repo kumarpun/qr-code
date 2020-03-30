@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CustomMaterialModule } from './core/material/material.module';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    HttpClientModule
     
   ],
   providers: [

@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
 import { MatSnackBar } from '@angular/material';
+import {HttpClient} from '@angular/common/http';
 
 export const passwordMatchValidator: ValidatorFn = (formGroup: FormControl): ValidationErrors | null => {
   return formGroup.get('password').value ===  formGroup.get('confirmPassword').value ?
@@ -24,12 +25,16 @@ export class LandPageComponent implements OnInit {
   ngFormAdd: FormGroup;
   formdata;
   userName;
+  longitude: number;
+  latitude: number;
+  ipAddress: 'any';
 
   constructor(
     private cookie: CookieService ,
     public fb: FormBuilder,
     public router: Router,
     public snackbar: MatSnackBar,
+    private http: HttpClient,
   ) { 
     this.Obj = new User();
     this.createForm();
@@ -66,6 +71,30 @@ export class LandPageComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required])
     }, { validators: passwordMatchValidator })
+
+    this.getIPAddress();
+    this.getBrowserLocation();
+  }
+  getIPAddress() {
+    this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      this.ipAddress = res.ip;
+    }) 
+  }
+
+  getBrowserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const longtitud = position.coords.longitude;
+        const latitud = position.coords.latitude;
+        this.longitude   = longtitud;
+        this.latitude = latitud;
+        console.log(this.longitude);
+        console.log(this.latitude);
+        });
+  } else {
+     console.log("No support for geolocation")
+  }
+
   }
   
   capture() {
@@ -86,6 +115,9 @@ export class LandPageComponent implements OnInit {
     this.cookie.set('email', this.Obj.email, 365);
     this.cookie.set('password', this.Obj.password, 365);
     this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
+    this.cookie.set('longitudess', JSON.stringify(this.longitude), 365);
+    this.cookie.set('latitudess', JSON.stringify(this.latitude), 365);
+    this.cookie.set('ipAddress', this.ipAddress, 365);
     console.log(this.Obj.userName);
     console.log(this.Obj.phoneNumber);
     this.snackbar.open('Successfully register', 'Close', {
