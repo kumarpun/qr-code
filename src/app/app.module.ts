@@ -11,6 +11,7 @@ import { CustomMaterialModule } from './core/material/material.module';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AngalyticsComponent } from './angalytics/angalytics.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
     QrCodeComponent,
     LandPageComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AngalyticsComponent
   ],
   imports: [
     BrowserModule,

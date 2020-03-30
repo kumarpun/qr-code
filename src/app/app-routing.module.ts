@@ -4,6 +4,7 @@ import { QrCodeComponent } from './qr-code/qr-code.component';
 import { LandPageComponent } from './land-page/land-page.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AngalyticsComponent } from './angalytics/angalytics.component';
 
 const routes: Routes = [
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'analytics',
+    component: AngalyticsComponent
   }
 ];
 
