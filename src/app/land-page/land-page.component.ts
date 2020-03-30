@@ -82,20 +82,25 @@ export class LandPageComponent implements OnInit {
   }
 
   getBrowserLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const longtitud = position.coords.longitude;
-        const latitud = position.coords.latitude;
-        this.longitude   = longtitud;
-        this.latitude = latitud;
-        console.log(this.longitude);
-        console.log(this.latitude);
-        });
-  } else {
-     console.log("No support for geolocation")
+    this.http.get("http://ip-api.com/json").subscribe((res:any) => {
+      this.latitude = res.lat;
+      this.longitude = res.lon;
+      console.log(this.longitude);
+      console.log(this.latitude);
+    })
   }
-
-  }
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       const longtitud = position.coords.longitude;
+  //       const latitud = position.coords.latitude;
+  //       this.longitude   = longtitud;
+  //       this.latitude = latitud;
+  //       console.log(longtitud);
+  //       console.log(this.latitude);
+  //       });
+  // } else {
+  //    console.log("No support for geolocation")
+  // }
   
   capture() {
     console.log('capturing..');
@@ -115,8 +120,8 @@ export class LandPageComponent implements OnInit {
     this.cookie.set('email', this.Obj.email, 365);
     this.cookie.set('password', this.Obj.password, 365);
     this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
-    this.cookie.set('lon', JSON.stringify(this.longitude), 365);
-    this.cookie.set('lat', JSON.stringify(this.latitude), 365);
+    this.cookie.set('longitude', JSON.stringify(this.longitude), 365);
+    this.cookie.set('latitude', JSON.stringify(this.latitude), 365);
     this.cookie.set('ipAddress', this.ipAddress, 365);
     console.log(this.Obj.userName);
     console.log(this.Obj.phoneNumber);
