@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AngalyticsComponent } from './angalytics/angalytics.component';
+import { EncrDecrService } from './services/encrDecrService';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AngalyticsComponent } from './angalytics/angalytics.component';
     
   ],
   providers: [
-    CookieService
+    CookieService,
+    EncrDecrService
   ],
   bootstrap: [AppComponent],
 })

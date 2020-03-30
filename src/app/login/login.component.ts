@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { MatSnackBar } from '@angular/material';
 import { DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { EncrDecrService } from '../services/encrDecrService';
 
 declare var gtag;
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     public fb: FormBuilder,
     private _router: Router,
     public snackbar: MatSnackBar,
+    private EncrDecr: EncrDecrService,
     @Inject(DOCUMENT) private document: Document
   ) { 
     this.Obj = new User();
@@ -39,9 +41,13 @@ export class LoginComponent implements OnInit {
     {
         gtag('config', 'UA-162151893-2', 
         {
-          'page_path': event.urlAfterRedirects
-          
-        });
+          'page_path': event.urlAfterRedirects,
+          'linker': {
+            'domains': ['https://doxy.me/']
+          }
+        },
+
+        );
 
     })
    }
@@ -65,7 +71,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.ngForm = new FormGroup({
       email: new FormControl(this.cookie.get('email')),
-      password: new FormControl(this.cookie.get('password'))
+      password: new FormControl(this.EncrDecr.get('123456$#@$^@1ERF', this.cookie.get('password')))
     })
   }
   
@@ -82,7 +88,7 @@ export class LoginComponent implements OnInit {
 
   onsubmit(): void {
     if(this.cookie.get('email') === this.ngForm.get('email').value &&
-     this.cookie.get('password') === this.ngForm.get('password').value) {
+    this.EncrDecr.get('123456$#@$^@1ERF', this.cookie.get('password')) === this.ngForm.get('password').value) {
       console.log('success');
       this.snackbar.open('Successfully login', 'Close', {
         duration: 3000,

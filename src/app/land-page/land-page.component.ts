@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, Vali
 import { User } from '../models/user';
 import { MatSnackBar } from '@angular/material';
 import {HttpClient} from '@angular/common/http';
+import { EncrDecrService } from '../services/encrDecrService';
 
 export const passwordMatchValidator: ValidatorFn = (formGroup: FormControl): ValidationErrors | null => {
   return formGroup.get('password').value ===  formGroup.get('confirmPassword').value ?
@@ -35,6 +36,7 @@ export class LandPageComponent implements OnInit {
     public router: Router,
     public snackbar: MatSnackBar,
     private http: HttpClient,
+    private EncrDecr: EncrDecrService
   ) { 
     this.Obj = new User();
     this.createForm();
@@ -74,6 +76,13 @@ export class LandPageComponent implements OnInit {
 
     this.getIPAddress();
     this.getBrowserLocation();
+
+    var encrypted = this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password);
+    console.log(this.cookie.get('password'));
+    var decrypted = this.EncrDecr.get('123456$#@$^@1ERF', encrypted);
+
+    console.log('Encrypted :' + encrypted);
+    console.log('Decrypted :' + decrypted);
   }
   getIPAddress() {
     this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
@@ -118,7 +127,7 @@ export class LandPageComponent implements OnInit {
     this.cookie.set('userName', this.Obj.userName, 365);
     this.cookie.set('phoneNumber', this.Obj.phoneNumber, 365);
     this.cookie.set('email', this.Obj.email, 365);
-    this.cookie.set('password', this.Obj.password, 365);
+    this.cookie.set('password', this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password), 365);
     this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
     this.cookie.set('longitude', JSON.stringify(this.longitude), 365);
     this.cookie.set('latitude', JSON.stringify(this.latitude), 365);
