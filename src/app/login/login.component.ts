@@ -1,10 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
 import { MatSnackBar } from '@angular/material';
 import { DOCUMENT } from '@angular/common';
+import { filter } from 'rxjs/operators';
+
+declare var gtag;
 
 @Component({
   selector: 'app-login',
@@ -29,6 +32,18 @@ export class LoginComponent implements OnInit {
     this.Obj = new User();
     this.createForm();
     // this.addForm();
+    const navEndEvents = _router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+    );
+    navEndEvents.subscribe((event: NavigationEnd) => 
+    {
+        gtag('config', 'UA-162151893-2', 
+        {
+          'page_path': event.urlAfterRedirects
+          
+        });
+
+    })
    }
 
    createForm() {
