@@ -125,12 +125,13 @@ export class LandPageComponent implements OnInit {
   onsubmit(): void {
 
     var storeArray = [this.Obj.userName, this.Obj.phoneNumber, this.Obj.email, 
-                      this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password),
-                      this.ipAddress, JSON.stringify(this.longitude),
-                      JSON.stringify(this.latitude)];
+                      this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password)];
     var newStr = storeArray;
     var userinfomation = JSON.stringify(newStr);
     this.cookie.set('userinfo', userinfomation, 365);
+    this.cookie.set('longitude', JSON.stringify(this.longitude), 365);
+    this.cookie.set('latitude', JSON.stringify(this.latitude), 365);
+    this.cookie.set('ipAddress', this.ipAddress, 365);
      console.log(userinfomation);   
 
     // this.cookie.set('userName', this.Obj.userName, 365);
