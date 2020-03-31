@@ -69,10 +69,13 @@ export class LoginComponent implements OnInit {
   //  }
 
   ngOnInit() {
+    var info = JSON.parse(this.cookie.get('userinfo'));
+    console.log(info[3]);
     this.ngForm = new FormGroup({
-      email: new FormControl(this.cookie.get('email')),
-      password: new FormControl(this.EncrDecr.get('123456$#@$^@1ERF', this.cookie.get('password')))
+      email: new FormControl(info[2]),
+      password: new FormControl(this.EncrDecr.get('123456$#@$^@1ERF', info[3]))
     })
+    console.log(this.EncrDecr.get('123456$#@$^@1ERF', info[3]))
   }
   
   capture() {
@@ -87,8 +90,9 @@ export class LoginComponent implements OnInit {
   }
 
   onsubmit(): void {
-    if(this.cookie.get('email') === this.ngForm.get('email').value &&
-    this.EncrDecr.get('123456$#@$^@1ERF', this.cookie.get('password')) === this.ngForm.get('password').value) {
+    var info = JSON.parse(this.cookie.get('userinfo'));
+    if(info[2] === this.ngForm.get('email').value &&
+    this.EncrDecr.get('123456$#@$^@1ERF', info[3]) === this.ngForm.get('password').value) {
       console.log('success');
       this.snackbar.open('Successfully login', 'Close', {
         duration: 3000,

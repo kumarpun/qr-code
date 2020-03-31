@@ -124,16 +124,25 @@ export class LandPageComponent implements OnInit {
 
   onsubmit(): void {
 
-    this.cookie.set('userName', this.Obj.userName, 365);
-    this.cookie.set('phoneNumber', this.Obj.phoneNumber, 365);
-    this.cookie.set('email', this.Obj.email, 365);
-    this.cookie.set('password', this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password), 365);
-    this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
-    this.cookie.set('longitude', JSON.stringify(this.longitude), 365);
-    this.cookie.set('latitude', JSON.stringify(this.latitude), 365);
-    this.cookie.set('ipAddress', this.ipAddress, 365);
-    console.log(this.Obj.userName);
-    console.log(this.Obj.phoneNumber);
+    var storeArray = [this.Obj.userName, this.Obj.phoneNumber, this.Obj.email, 
+                      this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password),
+                      this.ipAddress, JSON.stringify(this.longitude),
+                      JSON.stringify(this.latitude)];
+    var newStr = storeArray;
+    var userinfomation = JSON.stringify(newStr);
+    this.cookie.set('userinfo', userinfomation, 365);
+     console.log(userinfomation);   
+
+    // this.cookie.set('userName', this.Obj.userName, 365);
+    // this.cookie.set('phoneNumber', this.Obj.phoneNumber, 365);
+    // this.cookie.set('email', this.Obj.email, 365);
+    // this.cookie.set('password', this.EncrDecr.set('123456$#@$^@1ERF', this.Obj.password), 365);
+    // this.cookie.set('confirmPassword', this.Obj.confirmPassword, 365);
+    // this.cookie.set('longitude', JSON.stringify(this.longitude), 365);
+    // this.cookie.set('latitude', JSON.stringify(this.latitude), 365);
+    // this.cookie.set('ipAddress', this.ipAddress, 365);
+    // console.log(this.Obj.userName);
+    // console.log(this.Obj.phoneNumber);
     this.snackbar.open('Successfully register', 'Close', {
       duration: 3000,
       verticalPosition: 'top'  
