@@ -132,7 +132,7 @@ export class LandPageComponent implements OnInit {
     this.cookie.set('longitude', JSON.stringify(this.longitude), 365);
     this.cookie.set('latitude', JSON.stringify(this.latitude), 365);
     this.cookie.set('ipAddress', this.ipAddress, 365);
-     console.log(userinfomation);   
+    console.log(userinfomation);   
 
     // this.cookie.set('userName', this.Obj.userName, 365);
     // this.cookie.set('phoneNumber', this.Obj.phoneNumber, 365);
